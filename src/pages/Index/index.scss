@@ -1,0 +1,208 @@
+.home {
+  .ant-carousel .slick-slide {
+    width: 100%;
+    .banner {
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+    .strategy-list {
+      display: flex;
+      justify-content: space-between;
+      .strategy-item {
+        flex: 1;
+        display: flex;
+        
+        > img {
+          height: 130px;
+          width: 130px;
+        }
+        .message {
+          margin-top: 45px;
+          .title {
+            font-size: 18px;
+          }
+          > p {
+            font-size: 14px;
+            margin-bottom: 0;
+            color: #333;
+          }
+        }
+      }
+    }
+    .rank-wrapper {
+      > .title {
+        text-align: center;
+        font-size: 32px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        font-weight: 100;
+      }
+      .rank {
+        display: flex;
+        .left,
+        .right {
+          flex: 1;
+          .decorate {
+            margin-bottom: 30px;
+          }
+          .rank-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 25px;
+          }
+          .more {
+            margin-right: 55px;
+            cursor: pointer;
+            &:active{
+              opacity: 0.5;
+            }
+          }
+        }
+        .left {
+          margin-left: 50px;
+          margin-right: 50px;
+          .title-name {
+            font-size: 18px;
+            color: #999;
+            display: flex;
+            .name {
+              width: 200px;
+            }
+            .profit {
+              width: 100px;
+              text-align: center;
+            }
+            .huice {
+              width: 100px;
+              text-align: center;
+            }
+            .price {
+              width: 100px;
+              text-align: center;
+            }
+          }
+          .strategy-item {
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            margin-top: 30px;
+            cursor: pointer;
+            &:active{
+              opacity: 0.5;
+            }
+            .name {
+              width: 200px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .profit {
+              width: 100px;
+              text-align: center;
+              color: #ff9900;
+            }
+            .huice {
+              width: 100px;
+              text-align: center;
+              color: #ff9900;
+            }
+            .price {
+              width: 100px;
+              text-align: center;
+            }
+          }
+        }
+        .right {
+          margin-right: 40px;
+          .title-name {
+            font-size: 18px;
+            color: #999;
+            display: flex;
+            .name {
+              width: 200px;
+            }
+            .profit {
+              width: 100px;
+              text-align: center;
+            }
+            .huice {
+              width: 100px;
+              text-align: center;
+            }
+            .price {
+              width: 100px;
+              text-align: center;
+            }
+          }
+          .strategy-item {
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            margin-top: 30px;
+            cursor: pointer;
+            &:active{
+              opacity: 0.5;
+            }
+            .name {
+              width: 200px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            .profit {
+              width: 100px;
+              text-align: center;
+              color: #ff9900;
+            }
+            .huice {
+              width: 100px;
+              text-align: center;
+              color: #ff9900;
+            }
+            .price {
+              width: 100px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+    .supply-wrapper {
+        margin-bottom: 130px;
+      > .title {
+        text-align: center;
+        font-size: 32px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+        font-weight: 100;
+      }
+      .figure-list{
+          display: flex;
+          justify-content: space-between;
+          .figure-item{
+              flex: 1;
+              text-align: center;
+              .figure-title{
+                font-size: 24px;
+                text-align: center;
+                margin-bottom: 24px;
+                margin-top: 40px;
+                color: #333;
+              }
+              .intro{
+                font-size: 16px;
+                text-align: center;
+                color: #666;
+              }
+          }
+      }
+    }
+  }
+}

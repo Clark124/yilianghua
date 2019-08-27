@@ -1,0 +1,131 @@
+.ant-modal-title {
+  text-align: center;
+}
+.all-concept-model {
+  height: 400px;
+  overflow: auto;
+  .select-item {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 190px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border: 1px solid #eeeeee;
+    margin: 0 20px 20px 0;
+
+    &.list {
+      background: #edf3ff;
+    }
+    &.active {
+      background: #edf3ff;
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}
+.scan-create-wrapper {
+  color: #333;
+  > .title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .scan-type-wrapper {
+    padding: 20px 40px;
+    background: #fff;
+    border: 1px solid #eee;
+    .strategy-scan {
+      margin-top: 20px;
+      .scan-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        .item-name {
+          width: 150px;
+        }
+        .captital-input {
+          width: 118px;
+          height: 30px;
+          border: 1px solid #ddd;
+          padding: 0 10px;
+          border-radius: 3px;
+        }
+      }
+      .strategy-scan-title {
+        margin-bottom: 20px;
+        &.has {
+          margin-top: 30px;
+        }
+      }
+      .range-list,
+      .has-select-list {
+        min-height: 90px;
+        > .for-more {
+          color: #2a89ff;
+          cursor: pointer;
+          transition: all 0.3s;
+          &:hover {
+            color: #93b7e4;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+        .select-item {
+          display: inline-flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 190px;
+          height: 30px;
+          line-height: 30px;
+          padding: 0 10px;
+          cursor: pointer;
+          font-size: 12px;
+          border: 1px solid #eeeeee;
+          margin: 0 20px 20px 0;
+
+          &.list {
+            background: #edf3ff;
+          }
+          &.active {
+            background: #edf3ff;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+        }
+      }
+      .has-select-list {
+        padding: 20px;
+        border: 1px solid #eeeeee;
+      }
+      .ant-tabs-bar {
+        margin-bottom: 0;
+      }
+      .ant-tabs-tabpane {
+        border: 1px solid #eee;
+        border-top: none;
+        padding: 20px;
+      }
+    }
+  }
+  .save-btn{
+    background: #2a89ff;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    &:active{
+        opacity: 0.5;
+    }
+  }
+}

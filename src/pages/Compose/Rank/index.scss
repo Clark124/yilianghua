@@ -1,0 +1,192 @@
+.rank-wrapper {
+  margin-top: 30px;
+
+  color: #333;
+  .header-link {
+    font-size: 13px;
+    .arrow {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .title {
+      color: #2a89ff;
+    }
+  }
+  .banner {
+    width: 1200px;
+    height: 176px;
+    margin-top: 17px;
+    margin-bottom: 33px;
+  }
+  .select-wrapper {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 23px;
+    .title {
+      margin-right: 8px;
+    }
+    .select-item {
+      padding: 4px 16px;
+      margin-right: 30px;
+
+      border-radius: 12px;
+      cursor: pointer;
+      &.active {
+        background: #2a89ff;
+        color: #fff;
+      }
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+  .compose-container {
+    display: flex;
+    justify-content: space-between;
+    .compose-list {
+      width: 902px;
+      min-height: 500px;
+      .compose-item {
+        position: relative;
+        display: inline-block;
+        width: 295px;
+        height: 344px;
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(237, 237, 237, 1);
+        box-sizing: border-box;
+        padding: 18px 15px;
+        margin-right: 8px;
+        margin-bottom: 9px;
+        &:nth-child(3n + 3) {
+          margin-right: 0;
+        }
+        .type {
+          position: absolute;
+          width: 50px;
+          height: 46px;
+          right: 0;
+          top: 0;
+        }
+        .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-bottom: 14px;
+          border-bottom: 1px solid #e5e5e5;
+          .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2a89ff;
+          }
+          .username {
+            font-size: 13px;
+            color: #999;
+            margin-right: 18px;
+          }
+        }
+        .chart {
+          width: 100%;
+          height: 185px;
+        }
+        .info-list {
+          display: flex;
+          justify-content: space-between;
+          .info {
+            font-size: 13px;
+            color: #333;
+            .text {
+              margin-bottom: 5px;
+            }
+          }
+        }
+        .compose-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 20px;
+          .price {
+            font-size: 14px;
+            color: #ff6060;
+            font-weight: bold;
+          }
+          .per-month {
+            font-size: 12px;
+            color: #ff6060;
+          }
+          .price-up {
+            font-size: 12px;
+            color: #666;
+          }
+          .detail-btn {
+            display: inline-block;
+            width: 83px;
+            height: 29px;
+            background: rgba(255, 178, 67, 1);
+            border-radius: 14px;
+            text-align: center;
+            line-height: 29px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            &:active {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+      .page-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 86px;
+      }
+    }
+    .right {
+      width: 287px;
+      height: 686px;
+      border: 1px solid #ededed;
+      .title {
+        font-size: 14px;
+        height: 45px;
+        line-height: 45px;
+        color: #111;
+        font-weight: bold;
+        padding-left: 11px;
+        background: #f5f5f5;
+      }
+      .list-wrapper,
+      .list-wrapper-1 {
+        padding: 0 19px;
+        padding-top: 18px;
+        background: #fff;
+        min-height: 195px;
+        .list {
+          border-bottom: 1px solid #e5e5e5;
+          .list-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 17px;
+            font-size: 13px;
+            cursor: pointer;
+            &:active {
+              opacity: 0.5;
+            }
+            .name {
+              color: #333;
+            }
+            .profit {
+              color: #ff6060;
+              &.green{
+                color: green;
+              }
+            }
+          }
+        }
+      }
+      .list-wrapper-1 {
+        .list {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

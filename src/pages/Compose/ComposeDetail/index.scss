@@ -1,0 +1,298 @@
+.compose-detail-wrapper {
+  margin-top: 30px;
+  color: #333;
+
+  .header-link {
+    font-size: 13px;
+    .arrow {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .title {
+      color: #2a89ff;
+    }
+    .rank{
+      cursor: pointer;
+      &:active{
+        opacity: 0.5;
+      }
+    }
+  }
+  .main-message {
+    background: #fff;
+    width: 100%;
+    height: 134px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    padding: 25px 30px;
+    .first-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      .left {
+        color: #333;
+        .name {
+          color: #333;
+          font-size: 19px;
+          margin-right: 50px;
+        }
+        .price {
+          color: #fc6061;
+          margin-right: 50px;
+        }
+      }
+      .right {
+        .subscrib {
+          display: inline-block;
+          width: 80px;
+          height: 27px;
+          line-height: 27px;
+          color: #fff;
+          background: #2a89ff;
+          text-align: center;
+          cursor: pointer;
+          &:active {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    .second-line {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #333;
+      .author,
+      .style {
+        margin-right: 50px;
+      }
+    }
+    .discrib {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333;
+    }
+  }
+  .compose-regular{
+    margin-top: 20px;
+    .sub-title{
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .content{
+      padding: 20px 30px;
+      background: #fff;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+      .range-list{
+        padding: 0px 70px;
+        .range-item{
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+         
+          .rangeitem{
+            margin-right: 20px;
+            padding: 3px 10px;
+            border: 1px solid #ddd;
+          }
+        }
+      }
+      .indicate-list{
+        padding: 0px 0 20px 70px;
+        .indicate-item{
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          >.name{
+            width: 180px;
+          }
+          >.range,.value1,.value2{
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ddd;
+            padding-left: 10px;
+            margin-right: 20px;
+          }
+          >.value1,.value2{
+            margin-right: 10px;
+            margin-left: 10px;
+          }
+          >.name1{
+            width: 180px;
+          }
+          >.name2{
+            width: 150px;
+          }
+          >.value3{
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ddd;
+            padding-left: 10px;
+            font-size: 13px;
+            margin-right: 5px;
+          }
+        }
+      }
+      .strategy-code-input{
+        border: 1px solid #ddd;
+        margin-left: 70px;
+        margin-top: 0px;
+        width: 400px;
+        height: 200px;
+        resize: none;
+        overflow: auto;
+        margin-bottom: 20px;
+        padding: 5px 10px;
+      }
+    }
+  }
+  .statistics {
+    margin-top: 30px;
+    .title {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .table {
+      height: 136px;
+      border: 1px solid #d7d7d7;
+      background: #fff;
+      display: flex;
+      .profit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 350px;
+        border-right: 1px solid #d7d7d7;
+        .number {
+          font-size: 38px;
+          color: #fc6061;
+        }
+        .text {
+          font-size: 13px;
+          color: #333;
+        }
+      }
+      .table-item {
+        flex: 1;
+        border-right: 1px solid #d7d7d7;
+        &:last-child {
+          border-right: none;
+        }
+        .item,
+        .item-1 {
+          height: 68px;
+          border-bottom: 1px solid #d7d7d7;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          font-size: 13px;
+          .name {
+            color: #999;
+          }
+          .number {
+            color: #333;
+          }
+        }
+        .item-1 {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+  .profit-curve {
+    margin-top: 30px;
+    .title {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .content {
+      height: 495px;
+      border: 1px solid #d7d7d7;
+      background: #fff;
+      box-sizing: border-box;
+      padding: 20px;
+      .select-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        .date-range {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+  .table-list {
+    margin-top: 30px;
+    .title {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .table{
+        width: 100%;
+        border: 1px solid #E5E5E5;
+        border-bottom: none;
+        margin-top: 17px;
+        padding: 1px 1px 0 1px;
+        .t-body{
+            width: 100%;
+        }
+        .table-header{
+            display: flex;
+            box-sizing: border-box;
+            width: 100%;
+            td{
+                flex:1;
+                font-size: 13px;
+                color: #5870A2;
+                font-weight: bold;
+                display: flex;
+                box-sizing: border-box;
+                padding: 8px 0;
+                justify-content: center;
+                text-align: center;
+                background:rgba(51,102,204,0.1);
+                border-right: 0.5px solid #fff;
+                &:last-child{
+                    border-right: none;
+                }
+            }
+        }
+        .table-item{
+            display: flex;
+            box-sizing: border-box;
+            width: 100%;
+            td{
+                flex:1;
+                font-size: 13px;
+                color: #222;
+                display: flex;
+                box-sizing: border-box;
+                text-align: center;
+                padding: 8px 0;
+                justify-content: center;
+                text-align: center;
+                border-right: 0.5px solid #E5E5E5;
+                border-bottom: 0.5px solid #E5E5E5;
+                &:last-child{
+                    border-right: none;
+                }
+                
+            }
+        }
+    }
+  }
+}
+.compose-detail-wrapper-loading{
+  height: 500px;
+}

@@ -1,0 +1,39 @@
+.agreement-wrapper {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  .agreement{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 523px;
+    height: 580px;
+    box-sizing: border-box;
+    background: #fff;
+    overflow: auto;
+    padding: 30px;
+    .icon-cancel{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        &:active{
+            opacity: 0.5;
+        }
+    }
+    color: #666;
+    .title{
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+    p{
+        margin-bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,194 @@
+.strategy-edit-wrapper {
+  .nav-title {
+    padding: 20px 0;
+    font-size: 16px;
+    color: #333;
+    > span {
+      margin-right: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        color: #999;
+      }
+      &:active {
+        opacity: 0.5;
+      }
+      &.current {
+        color: #2a89ff;
+        &:hover {
+          color: blue;
+        }
+      }
+    }
+  }
+  .edit-wraper {
+    background: #262626;
+    min-height: 700px;
+    .title {
+      color: #fff;
+      font-size: 16px;
+      line-height: 35px;
+      margin: 0;
+      padding: 0px 20px;
+    }
+    .edit-body {
+      height: 550px;
+      display: flex;
+      .edit-code {
+        flex: 1;
+        .select-theme {
+          height: 50px;
+          background: #353334;
+          display: flex;
+          align-items: center;
+          color: #fff;
+          padding-left: 20px;
+          > input {
+            width: 350px;
+            height: 30px;
+            border: 1px solid #504e4f;
+            margin: 0 30px 0 0px;
+            background: #353334;
+            padding: 0 10px;
+            color: #fff;
+            font-size: 13px;
+          }
+        }
+        .code-mirror-wrapper {
+          width: 850px;
+          overflow: auto;
+        }
+        .operate-btn {
+          height: 50px;
+          display: flex;
+          align-items: center;
+          background: #353334;
+          > span {
+            padding: 3px 10px;
+            color: #fff;
+            border-radius: 5px;
+            background: #666666;
+            margin-left: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            &:active {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+      .param-list-wrapper {
+        width: 350px;
+        background: #3c3c3c;
+        .param-head {
+          height: 50px;
+          display: flex;
+          padding: 0 20px;
+          justify-content: space-between;
+          align-items: center;
+          color: #fff;
+          .btn {
+            width: 60px;
+            height: 25px;
+            cursor: pointer;
+            background: #666666;
+            font-size: 12px;
+            text-align: center;
+            line-height: 25px;
+            display: inline-block;
+            margin-left: 15px;
+            border-radius: 5px;
+            &:active {
+              opacity: 0.5;
+            }
+          }
+        }
+        .param-list {
+          height: 463px;
+          overflow: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+        .param-names {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 2px;
+
+          .ant-select-selection--single {
+            width: 68px;
+            height: 35px;
+            background: #313234;
+            border: none;
+            outline: none;
+            color: #fff;
+          }
+          .ant-select-selection {
+            border-radius: 0;
+            outline: none;
+          }
+          .anticon {
+            color: #fff;
+          }
+          .ant-select-arrow {
+            right: 3px;
+            top: 46%;
+          }
+          .ant-select-selection-selected-value {
+            overflow: inherit;
+          }
+          > span {
+            width: 68px;
+            height: 35px;
+            background: #313234;
+            line-height: 35px;
+            text-align: center;
+            color: #83817d;
+            font-size: 12px;
+            &.delete {
+              cursor: pointer;
+              color: #fff;
+              &:active {
+                opacity: 0.5;
+              }
+            }
+          }
+          > input {
+            width: 68px;
+            height: 35px;
+            background: #313234;
+            line-height: 35px;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    .info-log {
+      color: #fff;
+      box-sizing: border-box;
+      padding: 10px;
+      height: 115px;
+      overflow: auto;
+    }
+  }
+  .discrib {
+    margin-top: 10px;
+    > .title {
+      color: #000;
+      font-size: 16px;
+    }
+    .edit-discrib {
+      width: 100%;
+      height: 150px;
+      box-sizing: border-box;
+      padding: 10px 15px;
+      background: #3c3c3c;
+      color: #fff;
+      font-size: 15px;
+      resize: none;
+      margin-top: 5px;
+    }
+  }
+}

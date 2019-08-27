@@ -1,0 +1,129 @@
+.backtest-list-wrapper {
+  .nav-title {
+    padding: 20px 0;
+    font-size: 16px;
+    color: #333;
+    > span {
+      margin-right: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        color: #999;
+      }
+      &:active {
+        opacity: 0.5;
+      }
+      &.current {
+        color: #2a89ff;
+        &:hover {
+          color: blue;
+        }
+      }
+    }
+  }
+  .btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+    .operate {
+      > span {
+        width: 140px;
+        height: 35px;
+        line-height: 35px;
+        background: #2a89ff;
+        color: #fff;
+        font-size: 14px;
+        display: inline-block;
+        text-align: center;
+        margin-left: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+        &.delete{
+            background: #aaa;
+        }
+        &:active{
+            opacity: 0.5;
+        }
+      }
+    }
+  }
+  .table-wrapper{
+      min-height: 400px;
+  }
+  .table {
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-bottom: none;
+    margin-top: 17px;
+    padding: 1px 1px 0 1px;
+    &.item {
+      margin-top: 0;
+      border-top: none;
+    }
+    .t-body {
+      width: 100%;
+    }
+    .table-header {
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      td {
+        flex: 1;
+        font-size: 13px;
+        color: #5870a2;
+        font-weight: bold;
+        display: flex;
+        box-sizing: border-box;
+        padding: 8px 0;
+        justify-content: center;
+        text-align: center;
+        background: rgba(51, 102, 204, 0.1);
+        border-right: 0.5px solid #fff;
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+    .table-item {
+      display: flex;
+      box-sizing: border-box;
+      width: 100%;
+      td {
+        flex: 1;
+        font-size: 13px;
+        color: #222;
+        display: flex;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 8px 0;
+        justify-content: center;
+        text-align: center;
+        border-right: 0.5px solid #e5e5e5;
+        border-bottom: 0.5px solid #e5e5e5;
+        background: #fff;
+        &:last-child {
+          border-right: none;
+        }
+        &.profit{
+            color: red;
+            &.green{
+                color: green;
+            }
+        }
+        &.click{
+            transition: all 0.3s;
+            cursor: pointer;
+            &:hover{
+                color: #aaa;
+            }
+            &:active{
+                opacity: 0.5;
+            }
+           
+        }
+      }
+    }
+  }
+}

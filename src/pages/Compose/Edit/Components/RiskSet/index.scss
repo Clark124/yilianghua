@@ -1,0 +1,124 @@
+.risk-set-wrapper {
+  color: #333;
+  font-size: 14px;
+  .select-radio {
+    margin-top: 30px;
+    .title {
+      margin-right: 10px;
+    }
+  }
+  .ratio {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    .input {
+      width: 180px;
+      height: 35px;
+      margin-left: 10px;
+      margin-right: 5px;
+      padding-left: 10px;
+      border: 1px solid #e7e7e7;
+    }
+    .title-2 {
+      margin-left: 70px;
+    }
+  }
+  .compose-name {
+    margin-top: 30px;
+    .input {
+      width: 340px;
+      height: 35px;
+      border: 1px solid #e7e7e7;
+      margin-left: 10px;
+      padding-left: 10px;
+    }
+  }
+  .checkbox {
+    margin-top: 30px;
+    .title {
+      margin-right: 10px;
+    }
+    .select {
+      margin-right: 30px;
+    }
+  }
+  .price {
+    margin-top: 30px;
+    .input {
+      width: 180px;
+      height: 35px;
+      border: 1px solid #e7e7e7;
+      margin-left: 10px;
+      margin-right: 5px;
+      padding-left: 10px;
+    }
+    .title-1 {
+      margin-left: 80px;
+    }
+  }
+  .introduce {
+    margin-top: 30px;
+    display: flex;
+    .title {
+      margin-right: 10px;
+    }
+    .text {
+      width: 890px;
+      height: 163px;
+      border: 1px solid #e7e7e7;
+      padding: 10px;
+      resize: none;
+    }
+  }
+  .bottom-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    .btn {
+      width: 120px;
+      height: 30px;
+      background: #4089ff;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      border-radius: 15px;
+      cursor: pointer;
+      &:active {
+        opacity: 0.5;
+      }
+      &.pre {
+        margin-right: 100px;
+      }
+    }
+  }
+  .back-test-wrapper{
+    margin-top: 30px;
+    border-top: 1px solid #999;
+    .title{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .select{
+      display: flex;
+      align-items: center;
+      .select-indicate{
+        margin-left: 50px;
+      }
+    }
+    .begin-backg-test{
+      margin-top: 20px;
+      width: 120px;
+      height: 30px;
+      background: #4089ff;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      border-radius: 15px;
+      cursor: pointer;
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+
+}

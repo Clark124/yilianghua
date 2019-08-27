@@ -1,0 +1,30 @@
+.wrapper {
+    background: rgb(247, 247, 247);
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      .nav-title {
+        padding: 20px 0;
+        font-size: 16px;
+        color: #333;
+        > span {
+          margin-right: 10px;
+          cursor: pointer;
+          transition: all 0.3s;
+          &:hover {
+            color: #999;
+          }
+          &:active {
+            opacity: 0.5;
+          }
+          &.current {
+            color: #2a89ff;
+            &:hover {
+              color: blue;
+            }
+          }
+        }
+      }
+    }
+  }
+  

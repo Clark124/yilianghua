@@ -1,0 +1,194 @@
+.trade-set-wrapper {
+  font-size: 14px;
+  color: #333;
+  .setTitle {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .set-list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    .input-ratio{
+      height: 30px;
+      width: 190px;
+      border: 1px solid #ddd;
+      margin-left: 10px;
+      padding-left: 10px;
+      margin-right: 5px;
+    }
+  }
+  .max-hold {
+    > span {
+      padding-left: 30px;
+    }
+    .input {
+      width: 200px;
+      height: 35px;
+      border: 1px solid #ddd;
+      margin-left: 10px;
+      padding-left: 10px;
+      border-radius: 3px;
+    }
+  }
+  .strategy {
+    margin-top: 30px;
+    .change-strategy {
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      input {
+        width: 335px;
+        height: 35px;
+        border: 1px solid #ddd;
+        margin-right: 30px;
+        padding-left: 10px;
+      }
+      .change-strategy-btn{
+          background: #2A89FF;
+          color: #fff;
+          padding: 5px 20px;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 13px;
+          &:active{
+              opacity: 0.5;
+          }
+      }
+    }
+    .input-some{
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+        input{
+            width: 100px;
+            height: 37px;
+            margin-right: 70px;
+            margin-left: 10px;
+            border: 1px solid #ddd;
+            padding-left: 10px;
+        }
+    }
+    .implement{
+        margin-top: 30px;
+        .title{
+            margin-left: 32px;
+        }
+        .title-1{
+            margin-left: 110px;
+        }
+    }
+  }
+  .bottom-btn{
+      display: flex;
+      justify-content: center;
+      margin-top: 100px;
+      .btn{
+          width: 120px;
+          height: 30px;
+          background: #4089ff;
+          text-align: center;
+          line-height: 30px;
+          color: #fff;
+          border-radius: 15px;
+          cursor: pointer;
+          &:active{
+              opacity: 0.5;
+          }
+          &.pre{
+              margin-right: 100px;
+          }
+      }
+  }
+  .edit-model{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    .cancel-model{
+      position: absolute;
+      right: 20px;
+      top: 0px;
+      font-size: 30px;
+      cursor: pointer;
+      &:active{
+        opacity: 0.5;
+      }
+    }
+    .model-wrapper{
+      width: 423px;
+      height: 435px;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%,-50%);
+      background: #eee;
+      box-sizing: border-box;
+      padding: 15px 19px;
+      .model-title{
+        text-align: center;
+      }
+      .intro{
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .strategy-list{
+        width: 100%;
+        height: 211px;
+        background: #fff;
+        border: 1px solid #e7e7e7;
+        margin-top: 10px;
+        box-sizing: border-box;
+        padding: 20px;
+        overflow: auto;
+        .strategy-item{
+          margin-bottom: 10px;
+        }
+      }
+      .strategy-params{
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+      .params{
+        display: flex;
+        span{
+          margin-right: 10px;
+        }
+        input{
+          width: 90px;
+          height: 30px;
+          padding-left: 10px;
+          border: 1px solid #e7e7e7;
+          margin-right: 30px;
+        }
+      }
+     
+      
+      .btn-confirm{
+        margin-top: 20px;
+        text-align: right;
+        >span{
+          display: inline-block;
+          width: 55px;
+          height: 19px;
+          text-align: center;
+          line-height: 19px;
+          color: #fff;
+          background: #999;
+          border-radius: 3px;
+          font-size: 12px;
+          cursor: pointer;
+          &:active{
+            opacity: 0.5;
+          }
+          &.cancel{
+            margin-right: 17px;
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+}

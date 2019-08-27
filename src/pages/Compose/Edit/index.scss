@@ -1,0 +1,88 @@
+.create-wrapper {
+  margin-top: 30px;
+  .header-link {
+    color: #333;
+    font-size: 13px;
+    .arrow {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .title {
+      color: #2a89ff;
+    }
+  }
+  .step-img-wrapper {
+    position: relative;
+    margin-top: 15px;
+    font-size: 14px;
+    > img {
+      width: 1200px;
+      height: 48px;
+    }
+    .step-1 {
+      position: absolute;
+      color: #333;
+      width: 260px;
+      height: 48px;
+      line-height: 48px;
+      padding-left: 30px;
+      // cursor: pointer;
+      left: 0;
+      top: 0;
+      &.active {
+        color: #fff;
+      }
+      // &:active {
+      //   opacity: 0.5;
+      // }
+    }
+    .step-2 {
+      position: absolute;
+      color: #333;
+      width: 260px;
+      height: 48px;
+      line-height: 48px;
+      left: 335px;
+      top: 0;
+      // cursor: pointer;
+      &.active {
+        color: #fff;
+      }
+      // &:active {
+      //   opacity: 0.5;
+      // }
+    }
+    .step-3 {
+      position: absolute;
+      color: #333;
+      width: 260px;
+      height: 48px;
+      line-height: 48px;
+      left: 640px;
+      top: 0;
+      // cursor: pointer;
+      &.active {
+        color: #fff;
+      }
+      // &:active {
+      //   opacity: 0.5;
+      // }
+    }
+    .step-4 {
+      position: absolute;
+      color: #333;
+      width: 260px;
+      height: 48px;
+      line-height: 48px;
+      left: 950px;
+      top: 0;
+      // cursor: pointer;
+      &.active {
+        color: #fff;
+      }
+      // &:active {
+      //   opacity: 0.5;
+      // }
+    }
+  }
+}

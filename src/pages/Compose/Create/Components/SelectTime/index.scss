@@ -1,0 +1,212 @@
+.select-time {
+  color: #333;
+  font-size: 14px;
+  .select-radio {
+    margin-top: 30px;
+    .title {
+      margin-right: 10px;
+    }
+    .radio {
+      &.active {
+        color: #2a89ff;
+      }
+    }
+  }
+  .select-condition {
+    margin-top: 30px;
+    .title-1 {
+      margin-left: 80px;
+    }
+  }
+  .tab-indicate {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    .ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar {
+      margin-bottom: 0;
+    }
+    .ant-tabs-tab-active.ant-tabs-tab {
+      margin-right: 0 !important;
+    }
+    .ant-tabs-content.ant-tabs-content-no-animated.ant-tabs-top-content.ant-tabs-card-content {
+      background: #fff;
+      border-right: 1px solid #e8e8e8;
+      border-left: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 18px 20px 0 18px;
+    }
+    .finance {
+      .select-item {
+        display: inline-flex;
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 160px;
+        height: 30px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+        margin-right: 15px;
+        margin-bottom: 20px;
+
+        &:active {
+          opacity: 0.5;
+        }
+        &.active {
+          background: #dbe9ff;
+        }
+      }
+    }
+    .has-select {
+      width: 587px;
+      .title {
+        margin-top: 14px;
+        margin-bottom: 5px;
+      }
+      .select-list {
+        background: #fff;
+        border: 1px solid #ededed;
+        box-sizing: border-box;
+        padding: 20px;
+        .select-list-header {
+          display: flex;
+          justify-content: space-between;
+          color: #7f7f7f;
+          font-size: 13px;
+        }
+        .indicate-item {
+          margin-top: 20px;
+          font-size: 13px;
+          display: flex;
+          justify-content: space-between;
+          .name {
+            width: 246px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .delete {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            &:active {
+              opacity: 0.5;
+            }
+          }
+          .edit {
+            width: 14px;
+            height: 15px;
+            margin-right: 226px;
+            cursor: pointer;
+            &:active {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+  .bottom-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    .btn {
+      width: 120px;
+      height: 30px;
+      background: #4089ff;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      border-radius: 15px;
+      cursor: pointer;
+      &:active {
+        opacity: 0.5;
+      }
+      &.pre {
+        margin-right: 100px;
+      }
+    }
+  }
+  .edit-model{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    .cancel-model{
+      position: absolute;
+      right: 20px;
+      top: 0px;
+      font-size: 30px;
+      cursor: pointer;
+      &:active{
+        opacity: 0.5;
+      }
+    }
+    .model-wrapper{
+      width: 423px;
+      height: 308px;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%,-50%);
+      background: #eee;
+      box-sizing: border-box;
+      padding: 15px 19px;
+      .model-title{
+        text-align: center;
+      }
+      .intro{
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .indicates{
+        margin-top: 20px;
+        font-size: 13px;
+      }
+      .ma{
+        margin-top: 20px;
+        font-size: 13px;
+        .title{
+          display: inline-block;
+          margin-right: 10px;
+          width: 102px;
+          text-align: right;
+        }
+        .input{
+          width: 260px;
+          height: 30px;
+          border: 1px solid #e7e7e7;
+          padding-left: 10px;
+        }
+      }
+      .btn-confirm{
+        margin-top: 30px;
+        text-align: right;
+        >span{
+          display: inline-block;
+          width: 55px;
+          height: 19px;
+          text-align: center;
+          line-height: 19px;
+          color: #fff;
+          background: #999;
+          border-radius: 3px;
+          font-size: 12px;
+          cursor: pointer;
+          &:active{
+            opacity: 0.5;
+          }
+          &.cancel{
+            margin-right: 17px;
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+  .no-select-time-wrapper{
+    height: 260px;
+  }
+  
+}
