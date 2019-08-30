@@ -102,6 +102,7 @@
             color: #5870a2;
             font-weight: bold;
             display: flex;
+            align-items: center;
             box-sizing: border-box;
             padding: 8px 0;
             justify-content: center;
@@ -137,6 +138,13 @@
                 &:active{
                   opacity: 0.5;
                 }
+              }
+            }
+            .detail-btn{
+              cursor: pointer;
+              color: #2a89ff;
+              &:active{
+                opacity: 0.5;
               }
             }
             &:last-child {

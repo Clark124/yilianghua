@@ -15,6 +15,7 @@ import BackTestList from '../BackTestList/index'
 import Compare from '../compare/index'
 import Version from '../Version/index'
 import Create from '../Create/index'
+import BackTestReportDetail from '../BackTestReportDetail/index'
 
 export default class Index extends Component {
     constructor() {
@@ -39,6 +40,7 @@ export default class Index extends Component {
                         <Route exact path="/strategy/backtest/:id" component={BackTest} />
                         <Route exact path="/strategy/backtest/list/:id" component={BackTestList} />
                         <Route exact path="/strategy/backtest/report/:id" component={BackTestReport} />
+                        <Route exact path="/strategy/backtestReport" component={BackTestReportDetail} />
                         <Route exact path="/strategy/list" component={List} />
                         <Route exact path="/strategy/rank" component={Rank} />
                         <Route exact path="/strategy/detail/:id" component={Detail} />

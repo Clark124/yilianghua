@@ -428,10 +428,24 @@ export function saveStrategy(data){
 export function backtest(data){
     return postData(ezquant + '/quant/backtest/backprobe', data) 
 }
+export function backtestSingle(data){
+    return get(host + '/comboselectstock/strategybacktest/singlecode', data) 
+}
+
+export function backtestMuti(data){
+    return get(host + '/comboselectstock/strategybacktest/mutiplecode', data) 
+}
+
+
 
 //沪深300
 export function standardCurve(data){
     return postData(ezquant + '/quant/yield/curve', data) 
+}
+
+//沪深300净值曲线
+export function standardValue(data){
+    return get(market + '/quant/yield/curve', data) 
 }
 
 //回测报告

@@ -1,54 +1,21 @@
 import React, { Component } from 'react'
 import './index.scss'
-import { Select, message, DatePicker, Table, Modal } from 'antd'
+import { Select, message, DatePicker, Modal, Checkbox } from 'antd'
 import Moment from 'moment'
 import {
     strategyDetail, fetchStategyList, searchStcok, getKline, getQuote,
-    backtest, standardCurve, deployStrategy
+    backtest, standardCurve, deployStrategy, backtestMuti, backtestSingle
 } from '../../../serivce'
 import { changeNumber } from '../../../utils/utils'
-import TradeRoomChart from '../../../components/traderoomchart/traderoomchart'
-import { Chart, Geom, Axis, Tooltip, Legend } from "bizcharts";
+// import { Chart, Geom, Axis, Tooltip, Legend } from "bizcharts";
 import DataSet from "@antv/data-set";
 import Loading from '../../../components/Loading/index'
 import TrustModal from './components/Trusteeship/Trusteeship'
+import MutiCodeReport from '../MutiCodeReport/index'
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-const minuteData = [
-    // { title: '1 minute', value: '1 m', period: 1 },
-    // { title: '5 minute', value: '5 m', period: 2 },
-    // { title: '15 minute', value: '15 m', period: 3 },
-    // { title: '30 minute', value: '30m', period: 4 },
-    // { title: '1 Hour', value: '1 H', period: 5 },
-    // { title: '1 Day', value: '1 D', period: 6 },
-    // { title: '7 Day', value: '7 D', period: 7 },
-    // { title: '1 Month', value: '1 M', period: 8 },
-]
 
-const columns = [
-    {
-        title: '日期',
-        dataIndex: 'date',
-        key: 'date',
-    },
-    {
-        title: '价格',
-        dataIndex: 'price',
-        key: 'price',
-    },
-    {
-        title: '股数',
-        dataIndex: 'count',
-        key: 'count',
-    },
-    {
-        title: '买卖方向',
-        dataIndex: 'direct',
-        key: 'direct',
-        render: text => <span style={text === '买入' ? { color: 'red' } : { color: 'green' }}>{text}</span>,
-    },
-];
 
 export default class BackTest extends Component {
     constructor() {
@@ -65,6 +32,7 @@ export default class BackTest extends Component {
             testCode: "", //测试股票代码全称
             searchList: [], //搜索股票列表
             selectStockList: [],//选择股票列表
+            backTestStatus: "", //回测状态
             stockDate: [], //股票K线图数据
             curveDatas: [],//策略，沪深300收益率
             period: 6,
@@ -76,6 +44,7 @@ export default class BackTest extends Component {
             tradeRecords: [],//交易记录
             release_id: "",//回测ID
             showTrustModal: false, //显示托管策略
+            mutiCodeReport: "",
 
         }
     }
@@ -148,27 +117,28 @@ export default class BackTest extends Component {
     selectStock(item) {
         let { selectStockList } = this.state
         let isInclude = false
-        selectStockList.forEach(stockItem=>{
-            if(stockItem.prod_code===item.prod_code){
+        selectStockList.forEach(stockItem => {
+            if (stockItem.prod_code === item.prod_code) {
                 isInclude = true
             }
         })
 
         if (!isInclude) {
+            item.status = ''
             selectStockList.push(item)
         }
-        this.setState({ selectStockList ,searchList: [],searchText:""})
+        this.setState({ selectStockList, searchList: [], searchText: "" })
         // this.onGetKline(item.prod_code, 6)
         // this.onGetQuote(item.prod_code)
         // this.setState({ searchList: [], searchText: item.prod_code.substring(0, 6) + " " + item.prod_name, testCode: item.prod_code })
     }
     //删除选择的股票列表
-    cancelSelectStock(index){
+    cancelSelectStock(index) {
         let { selectStockList } = this.state
-        selectStockList = selectStockList.filter((stockItem,stockIndex)=>{
-            return stockIndex!==index
+        selectStockList = selectStockList.filter((stockItem, stockIndex) => {
+            return stockIndex !== index
         })
-        this.setState({selectStockList})
+        this.setState({ selectStockList })
     }
 
     //K线图数据
@@ -181,9 +151,13 @@ export default class BackTest extends Component {
     }
     //股票行情数据
     onGetQuote(code) {
-        getQuote({ code }).then(res => {
-            this.setState({ quote: res[0] })
+        return new Promise((resolve, reject) => {
+            getQuote({ code }).then(res => {
+                this.setState({ quote: res[0] })
+                resolve(res[0])
+            })
         })
+
     }
 
     periodCallback(item) {
@@ -204,16 +178,70 @@ export default class BackTest extends Component {
     }
 
     //点击开始回测
-    async onBackTest() {
-        let { testCode, strategyId, beginTime, endTime, initialFunds, strategyParams } = this.state
-        if (!testCode) {
+    // async onBackTest() {
+    //     let { testCode, strategyId, beginTime, endTime, initialFunds, strategyParams } = this.state
+    //     if (!testCode) {
 
-            Modal.error({
-                title: '提示',
-                content: '请选择回测标的!',
-            })
-            return
-        }
+    //         Modal.error({
+    //             title: '提示',
+    //             content: '请选择回测标的!',
+    //         })
+    //         return
+    //     }
+    //     let params = {}
+    //     if (strategyParams.length > 0) {
+    //         strategyParams.forEach(item => {
+    //             params[item.name] = item.def_value
+    //         })
+    //     } else {
+    //         params = { initCaptital: 100000 }
+    //     }
+
+    //     const token = localStorage.getItem('token')
+    //     const data = {
+    //         token,
+    //         strategyId,
+    //         period: 6,
+    //         code: testCode,
+    //         startTime: beginTime.format('YYYY-MM-DD'),
+    //         endTime: endTime.format('YYYY-MM-DD'),
+    //         strategy_params: JSON.stringify(params),
+    //         funds: initialFunds
+    //     }
+    //     this.setState({ status: 'loading' })
+    //     let standardData = await this.getStandardCurve()
+    //     backtest(data).then(res => {
+    //         this.setSignal(res)
+    //         let tradeReturn = res.result.trade_return
+    //         const capital = res.result.trade_pl
+    //         const tradeRecords = res.result.alerts.map((item, index) => {
+    //             return {
+    //                 key: index,
+    //                 date: item.time.substring(0, 10),
+    //                 price: item.signal.price,
+    //                 count: item.signal.lots,
+    //                 direct: item.signal.type === 1 ? '买入' : '卖出'
+    //             }
+    //         })
+    //         let datas = standardData.map((item, index) => {
+    //             for (let i = 0; i < tradeReturn.length; i++) {
+    //                 if (item.date === tradeReturn[i].date) {
+    //                     item.value1 = tradeReturn[i].value
+    //                     tradeReturn.splice(i, 1)
+    //                 }
+    //             }
+    //             return item
+    //         })
+    //         this.setState({ curveDatas: datas, capital, release_id: res.result.release_id, tradeRecords, status: 'success' })
+    //         message.success('回测完成~')
+    //     }).catch(err => {
+    //         this.setState({ status: 'success' })
+    //     })
+
+    // }
+    async getBackTestData(testCode, callback) {
+        let { strategyId, beginTime, endTime, initialFunds, strategyParams } = this.state
+
         let params = {}
         if (strategyParams.length > 0) {
             strategyParams.forEach(item => {
@@ -236,35 +264,134 @@ export default class BackTest extends Component {
         }
         this.setState({ status: 'loading' })
         let standardData = await this.getStandardCurve()
+        let quote = await this.onGetQuote(testCode)
         backtest(data).then(res => {
-            this.setSignal(res)
-            let tradeReturn = res.result.trade_return
-            const capital = res.result.trade_pl
-            const tradeRecords = res.result.alerts.map((item, index) => {
-                return {
-                    key: index,
-                    date: item.time.substring(0, 10),
-                    price: item.signal.price,
-                    count: item.signal.lots,
-                    direct: item.signal.type === 1 ? '买入' : '卖出'
-                }
-            })
-            let datas = standardData.map((item, index) => {
-                for (let i = 0; i < tradeReturn.length; i++) {
-                    if (item.date === tradeReturn[i].date) {
-                        item.value1 = tradeReturn[i].value
-                        tradeReturn.splice(i, 1)
+            getKline({ prod_code: testCode, period: 6 }).then(ret => {
+                let stockData = ret.data.candle[testCode]
+                let tradeReturn = res.result.trade_return
+                const tradeRecords = res.result.alerts.map((item, index) => {
+                    return {
+                        key: index,
+                        date: item.time.substring(0, 10),
+                        price: item.signal.price,
+                        count: item.signal.lots,
+                        direct: item.signal.type === 1 ? '买入' : '卖出'
                     }
-                }
-                return item
+                })
+                let datas = standardData.map((item, index) => {
+                    for (let i = 0; i < tradeReturn.length; i++) {
+                        if (item.date === tradeReturn[i].date) {
+                            item.value1 = tradeReturn[i].value
+                            tradeReturn.splice(i, 1)
+                        }
+                    }
+                    return item
+                })
+
+                callback({
+                    curveDatas: datas,
+                    stockData,
+                    tradeRecords,
+                    quote,
+                    alerts: res.result.alerts
+
+                })
+                this.setState({ status: 'success' })
             })
-            this.setState({ curveDatas: datas, capital, release_id: res.result.release_id, tradeRecords, status: 'success' })
-            message.success('回测完成~')
+
+
+
         }).catch(err => {
             this.setState({ status: 'success' })
         })
 
     }
+
+    async onBackTest() {
+        let { selectStockList, strategyId, beginTime, endTime, initialFunds, backTestStatus } = this.state
+        if (backTestStatus === 'loading') {
+            return
+        }
+        if (selectStockList.length === 0) {
+            message.info('至少选择一个标的')
+            return
+        }
+
+
+        this.setState({ backTestStatus: "loading" })
+        for (let i = 0; i < selectStockList.length; i++) {
+            const data = {
+                strategyId: strategyId,
+                initFund: initialFunds,
+                code: selectStockList[i].prod_code,
+                startDate: beginTime.format('YYYYMMDD'),
+                endDate: endTime.format('YYYYMMDD'),
+            }
+            await this.singleBacktest(data, i)
+        }
+        this.setState({ backTestStatus: "success" })
+    }
+    singleBacktest(data, index) {
+        const { selectStockList } = this.state
+        return new Promise((resolve, reject) => {
+            backtestSingle(data).then(res => {
+                selectStockList[index].status = 'success'
+                selectStockList[index].testData = res
+                selectStockList[index].isSelect = false
+                this.setState({ selectStockList })
+                resolve()
+            }).catch(err=>{
+                selectStockList[index].status = 'fail'
+                reject(err)
+            })
+        })
+    }
+
+    changeCheckbox(index) {
+        let { selectStockList } = this.state
+        selectStockList[index].isSelect = !selectStockList[index].isSelect
+        this.setState({ selectStockList })
+    }
+    changeAllCheckbox(e) {
+        let { selectStockList } = this.state
+        if (e.target.checked) {
+            selectStockList = selectStockList.map(item => {
+                item.isSelect = true
+                return item
+            })
+        } else {
+            selectStockList = selectStockList.map(item => {
+                item.isSelect = false
+                return item
+            })
+        }
+        this.setState({ selectStockList })
+
+    }
+    //跳转至报告详情页
+    toReportDetail(data, stockname, code) {
+        const { beginTime, endTime, strategyList, strategyId } = this.state
+        let strategyName = ""
+        strategyList.forEach(item => {
+            if (item.id === parseInt(strategyId)) {
+                strategyName = item.name
+            }
+        })
+        data.info = {
+            name: strategyName,
+            prod_name: stockname,
+            prod_code: code,
+            time_start: beginTime.format('YYYY-MM-DD'),
+            time_end: endTime.format('YYYY-MM-DD'),
+        }
+        this.getBackTestData(code, (res) => {
+            data.dataList = res
+            localStorage.setItem('backTestDetail', JSON.stringify(data))
+            window.open(`/#/strategy/backtestReport`, "_blank");
+        })
+
+    }
+
     //获取沪深300曲线
     getStandardCurve() {
         return new Promise((resolve, reject) => {
@@ -313,6 +440,7 @@ export default class BackTest extends Component {
         })
 
         this.setState({ stockDate })
+        return stockDate
     }
 
     //查看分析报告
@@ -382,13 +510,50 @@ export default class BackTest extends Component {
 
     }
 
+    getComposeReport() {
+        let { selectStockList, strategyId, beginTime, endTime, initialFunds } = this.state
+        let code = ""
+        selectStockList.forEach((item) => {
+            if (item.isSelect) {
+                code = code + item.prod_code + ','
+            }
+        })
+        if (code === "") {
+            message.info('请至少选择一个股票')
+            return
+        }
+        const data = {
+            strategyId: strategyId,
+            initFund: initialFunds,
+            code: code.slice(0, -1),
+            startDate: beginTime.format('YYYYMMDD'),
+            endDate: endTime.format('YYYYMMDD'),
+        }
+        console.log(data)
+        this.setState({ status: 'loading' })
+        backtestMuti(data).then(res => {
+            this.setState({ status: 'success', mutiCodeReport: res })
+        }).catch(err=>{
+            message.error('网络出错')
+            this.setState({ status: 'success'})
+        })
+    }
+
 
 
 
     render() {
-        const { status, strategyParams, beginTime, endTime, initialFunds, searchText, strategyList,
-            strategyId, searchList, stockDate, quote, curveDatas, capital, tradeRecords, showTrustModal, selectStockList
+        const { status, strategyParams, beginTime, endTime, initialFunds, searchText, strategyList, backTestStatus,
+            strategyId, searchList, quote, curveDatas, showTrustModal, selectStockList, mutiCodeReport
         } = this.state
+
+        let isCheckAll = true
+        selectStockList.forEach(item => {
+            if (!item.isSelect) {
+                isCheckAll = false
+            }
+        })
+
         let strategyName = ""
         strategyList.forEach(item => {
             if (item.id === parseInt(strategyId)) {
@@ -396,14 +561,14 @@ export default class BackTest extends Component {
             }
         })
 
-        //每日盈亏数据
-        let chartData = capital.map((item) => {
-            let obj = {}
-            obj['日期'] = Moment(item.date.substring(0, 8), 'YYYYMMDD').format('YYYY-MM-DD')
-            obj['盈亏'] = Number(item.value.toFixed(2))
-            return obj
+        // //每日盈亏数据
+        // let chartData = capital.map((item) => {
+        //     let obj = {}
+        //     obj['日期'] = Moment(item.date.substring(0, 8), 'YYYYMMDD').format('YYYY-MM-DD')
+        //     obj['盈亏'] = Number(item.value.toFixed(2))
+        //     return obj
 
-        })
+        // })
 
         //收益率数据
         let data = []
@@ -425,12 +590,12 @@ export default class BackTest extends Component {
             key: "types",
             value: "收益率"
         });
-        const cols = {
-            date: {
-                // range: [0, 1],
-                tickCount: 8,
-            }
-        };
+        // const cols = {
+        //     date: {
+        //         // range: [0, 1],
+        //         tickCount: 8,
+        //     }
+        // };
         return (
             <div className="back-test-wrapper">
                 {status === 'loading' ? <Loading text="回测中..." /> : null}
@@ -492,33 +657,62 @@ export default class BackTest extends Component {
                             </ul> : null
                         }
                     </div>
-                   
+
                     <div className="select-stock-list">
                         <div>已选股票列表</div>
-                        <table className="table">
-                            <tbody className="table" cellPadding="0" cellSpacing="0">
-                                <tr className="table-header">
-                                    <td>股票名称</td>
-                                    <td>股票代码</td>
-                                    <td>状态</td>
-                                    <td>操作</td>
-                                </tr>
-                                {selectStockList.map((item, index) => {
-                                    return (
-                                        <tr className="table-item" key={index}>
-                                            <td>{item.prod_name}</td>
-                                            <td>{item.prod_code}</td>
-                                            <td>待回测</td>
-                                            <td className="delete">
-                                                <span onClick={this.cancelSelectStock.bind(this,index)}>删除</span>
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
 
-                            </tbody>
-                        </table>
+                        {backTestStatus === 'success' ?
+                            <table className="table">
+                                <tbody className="table" cellPadding="0" cellSpacing="0">
+                                    <tr className="table-header">
+                                        <td>全选<Checkbox onChange={this.changeAllCheckbox.bind(this)} style={{ marginLeft: 5 }} checked={isCheckAll} /></td>
+                                        <td>股票名称</td>
+                                        <td>股票代码</td>
+                                        <td>收益率(%)</td>
+                                        <td>最大回测(%)</td>
+                                        <td>详情</td>
+
+                                    </tr>
+                                    {selectStockList.map((item, index) => {
+                                        return (
+                                            <tr className="table-item" key={index}>
+                                                <td><Checkbox onChange={this.changeCheckbox.bind(this, index)} checked={item.isSelect} /></td>
+                                                <td>{item.prod_name}</td>
+                                                <td>{item.prod_code}</td>
+                                                <td>{(item.testData.return_ratio * 100).toFixed(2)}</td>
+                                                <td>{(item.testData.MaxDD * 100).toFixed(2)}</td>
+                                                <td><span className="detail-btn" onClick={this.toReportDetail.bind(this, item.testData, item.prod_name, item.prod_code)}>报告详情</span></td>
+                                            </tr>
+                                        )
+                                    })}
+
+                                </tbody>
+                            </table> :
+                            <table className="table">
+                                <tbody className="table" cellPadding="0" cellSpacing="0">
+                                    <tr className="table-header">
+                                        <td>股票名称</td>
+                                        <td>股票代码</td>
+                                        {backTestStatus === 'loading' ? <td>状态</td> : null}
+                                        {backTestStatus === '' ? <td>操作</td> : null}
+
+                                    </tr>
+                                    {selectStockList.map((item, index) => {
+                                        return (
+                                            <tr className="table-item" key={index}>
+                                                <td>{item.prod_name}</td>
+                                                <td>{item.prod_code}</td>
+                                                {backTestStatus === 'loading' ? <td>{item.status === 'success' ? "已完成" : "回测中..."}</td> : null}
+                                                {backTestStatus === '' ? <td className="delete"><span onClick={this.cancelSelectStock.bind(this, index)}>删除</span></td> : null}
+                                            </tr>
+                                        )
+                                    })}
+
+                                </tbody>
+                            </table>
+                        }
                     </div>
+
                 </div>
                 {strategyParams.length > 0 ?
                     <div className="params-list">
@@ -535,42 +729,33 @@ export default class BackTest extends Component {
                     </div> : null
                 }
 
-                <div className="operate-btn">
-                    <span className="btn" onClick={this.onBackTest.bind(this)}>回测</span>
-                    <span className="btn" onClick={this.trustStrategy.bind(this)}>托管</span>
-                </div>
-                {stockDate.length > 0 ? <div className="model-title">买卖信号</div> : null}
+                {
+                    backTestStatus !== 'success' ?
+                        <div className="operate-btn">
+                            <span className="btn" onClick={this.onBackTest.bind(this)}>{backTestStatus === 'loading' ? '回测中...' : '回测'}</span>
+                            {/* <span className="btn" onClick={this.trustStrategy.bind(this)}>托管</span> */}
+                        </div> : null
+                }
+                {
+                    backTestStatus === 'success' ?
+                        <div className="operate-btn">
+                            <span className="btn" onClick={this.getComposeReport.bind(this)}>生成组合报告</span>
+                        </div> : null
+                }
 
-                <div className="stock-k-line">
-                    {stockDate.length > 0 ?
-                        <TradeRoomChart
-                            data={stockDate}
-                            width={1200}
-                            height={565}
-                            minuteData={minuteData}  //可根据股票或者外汇来设定
-                            periodCallback={this.periodCallback.bind(this)} //周期回调
-                            quote={quote}
-                        /> : null
-                    }
-                </div>
+                {mutiCodeReport ?<MutiCodeReport  datas={mutiCodeReport}/>
+                    : null
+                }
 
-                <div className="model-title">收益率（%）</div>
-                <div style={{ background: '#fff', marginTop: 10, marginBottom: 30 }}>
-                    <Chart height={400} data={dv} scale={cols} forceFit>
-                        <Legend textStyle={{ fontSize: '14' }} marker="square" />
-                        <Axis name="date" />
-                        <Axis line={{ stroke: "#ccc" }} name="收益率" />
-                        <Tooltip crosshairs={{ type: "y" }} />
-                        <Geom
-                            type="line"
-                            position="date*收益率"
-                            size={2}
-                            color={["types", ['#3E6ECF', '#E5364F']]}
-                        />
-                    </Chart>
-                </div>
 
-                <div className="model-title">每日盈亏（￥）</div>
+
+
+
+
+
+
+
+                {/* <div className="model-title">每日盈亏（￥）</div>
                 <div style={{ background: '#fff', marginTop: 10, marginBottom: 30 }}>
                     <Chart padding="auto" height={300} data={chartData} forceFit>
                         <Axis name='日期' />
@@ -583,15 +768,14 @@ export default class BackTest extends Component {
                                 return 'green';
                         }]} />
                     </Chart>
-                </div>
+                </div> */}
 
-                <div className="model-title">交易记录</div>
-                <Table columns={columns} dataSource={tradeRecords} />
 
-                <div className="mark">风险提示：投资有风险，请自主决策。上述信息供交流使用，仅供参考，不对您构成任何投资建议，据此操作，风险自担。</div>
-                <div className="look-report" onClick={this.lookReport.bind(this)}>
+
+                {/* <div className="mark">风险提示：投资有风险，请自主决策。上述信息供交流使用，仅供参考，不对您构成任何投资建议，据此操作，风险自担。</div> */}
+                {/* <div className="look-report" onClick={this.lookReport.bind(this)}>
                     查看分析报表
-                </div>
+                </div> */}
             </div>
         )
     }
