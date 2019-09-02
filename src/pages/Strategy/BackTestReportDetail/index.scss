@@ -83,6 +83,22 @@
       }
     }
   }
+  >.deploy{
+    margin: 0 auto;
+    width: 150px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+    color: #fff;
+    background: #2a89ff;
+    border-radius: 19px;
+    text-align: center;
+    cursor: pointer;
+    // margin-right: 30px;
+    &:active{
+      opacity: 0.5;
+    }
+  }
   .mark{
     margin-top: 30px;
     font-size: 12px;

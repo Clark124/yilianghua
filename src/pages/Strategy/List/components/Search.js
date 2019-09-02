@@ -14,6 +14,11 @@ export default class Search extends Component {
         const { searchText } = this.state
         this.props.searchStrategy(searchText)
     }
+    enterInput(e){
+        if(e.keyCode===13){
+            this.onSearch()
+        }
+    }
     render() {
         const { searchText } = this.state
         const tabIndex = this.props.tabIndex
@@ -22,6 +27,7 @@ export default class Search extends Component {
                 <div className="search">
                     <input type="text" className="input" placeholder="请输入要搜索的策略名称"
                         onChange={(e) => this.setState({ searchText: e.target.value })}
+                        onKeyUp={this.enterInput.bind(this)}
                         value={searchText}
                     />
                     <img src={search_icon} className="search-icon" onClick={this.onSearch.bind(this)} alt="" />

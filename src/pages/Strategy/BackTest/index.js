@@ -370,7 +370,7 @@ export default class BackTest extends Component {
     }
     //跳转至报告详情页
     toReportDetail(data, stockname, code) {
-        const { beginTime, endTime, strategyList, strategyId } = this.state
+        const { beginTime, endTime, strategyList, strategyId ,initialFunds,strategyParams,quote} = this.state
         let strategyName = ""
         strategyList.forEach(item => {
             if (item.id === parseInt(strategyId)) {
@@ -378,6 +378,10 @@ export default class BackTest extends Component {
             }
         })
         data.info = {
+            quote,
+            strategyId,
+            initialFunds,
+            strategyParams,
             name: strategyName,
             prod_name: stockname,
             prod_code: code,

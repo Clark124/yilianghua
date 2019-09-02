@@ -7,6 +7,8 @@ import Moment from 'moment'
 import DataSet from "@antv/data-set";
 import TradeRoomChart from '../../../components/traderoomchart/traderoomchart'
 import { changeNumber } from '../../../utils/utils'
+import { deployStrategy } from '../../../serivce'
+import TrustModal from '../BackTest/components/Trusteeship/Trusteeship'
 
 const minuteData = [
     // { title: '1 minute', value: '1 m', period: 1 },
@@ -49,7 +51,8 @@ export default class BackTestReport extends Component {
         super()
         this.state = {
             status: "",
-            data: {}
+            data: {},
+            showTrustModal: false,
         }
     }
     componentWillMount() {
@@ -96,10 +99,56 @@ export default class BackTestReport extends Component {
     periodCallback() {
 
     }
+    //点击托管
+    trustStrategy() {
+        this.setState({ showTrustModal: true })
+
+    }
+    //策略托管及发布
+    onDeployStrategy(value) {
+        const { name, description, is_publish, price, is_announce_source, is_system_use, system_use_price } = value
+        const {data} = this.state
+  
+        const { strategyId, initialFunds, strategyParams ,prod_code,prod_name} = data.info
+        const token = localStorage.getItem('token')
+        let params = {}
+        if (strategyParams.length > 0) {
+            strategyParams.forEach(item => {
+                params[item.name] = item.def_value
+            })
+        } else {
+            params = { initCaptital: 100000 }
+        }
+        const paramsData = {
+            token,
+            strategy_id: strategyId,
+            period: 6,
+            prod_code,
+            prod_name,
+            strategy_params: JSON.stringify(params),
+            funds: initialFunds,
+            name, description, is_publish, price, is_announce_source, is_system_use, system_use_price
+        }
+        this.setState({ status: 'trusting', showTrustModal: false })
+        deployStrategy(paramsData).then(res => {
+            this.setState({ status: 'success' })
+            if (res.success) {
+                // message.success('托管成功~')
+                this.props.history.push({
+                    pathname: '/strategy/list',
+                    search: '?type=3'
+                })
+            }
+        }).catch(err => {
+            this.setState({ status: 'success' })
+            console.log(err)
+        })
+
+    }
     render() {
         const { status } = this.state
         if (status === 'success') {
-            const { data, stockData } = this.state
+            const { data, stockData, showTrustModal } = this.state
             const { name, prod_name, prod_code, time_start, time_end } = data.info
             const { trade_number, return_ratio, timing_return, Sharpe_ratio, holding_time_ratio, capital, nwinner, nloser,
                 max_nwinner, max_nloser, totalwinner, totalloser, profit_avg, winner_avg, loser_avg, totalholdtime,
@@ -107,9 +156,7 @@ export default class BackTestReport extends Component {
                 dataList
             } = data
             let { curveDatas, tradeRecords, quote } = dataList
-            console.log(tradeRecords)
-
-
+        
             //收益率数据
             let dataCurve = []
             curveDatas.forEach((item, index) => {
@@ -139,6 +186,14 @@ export default class BackTestReport extends Component {
 
             return (
                 <div className="back-test-report">
+                    {status === 'trusting' ? <Loading text="托管中..." /> : null}
+                    <TrustModal visible={showTrustModal}
+                        hideModal={() => this.setState({ showTrustModal: false })}
+                        strategyName={name}
+                        quote={quote}
+                        className="trust-modal"
+                        deployStrategy={this.onDeployStrategy.bind(this)}
+                    />
                     <div className="backtest-title">策略基本信息：</div>
                     <table className="table" cellPadding="0" cellSpacing="0">
                         <tbody className="t-body">
@@ -263,6 +318,7 @@ export default class BackTestReport extends Component {
                     </div>
                     <div className="backtest-title">交易记录</div>
                     <Table columns={columns} dataSource={tradeRecords} />
+                    <div className="deploy btn" onClick={this.trustStrategy.bind(this)}>托管</div>
                 </div >
             )
         } else {
